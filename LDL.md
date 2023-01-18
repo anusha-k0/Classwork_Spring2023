@@ -2,4 +2,4 @@
 
 Low Density Lipoproteins
 
-Good proteins
+Bad proteins
