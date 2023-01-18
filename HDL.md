@@ -2,4 +2,6 @@
 
 High Density lipoproteins
 
-HDL is good?
+HDL is good
+
+Good HDL range: >60mg/dL
