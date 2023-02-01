@@ -28,7 +28,6 @@ def test_value_finder(db, mrn_to_find, test_name):
     else:
         print('MRN not found')
             
-
     
 def print_directory(db, room_numbers):
     for idx, patient in enumerate(db):
