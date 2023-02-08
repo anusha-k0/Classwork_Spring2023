@@ -29,7 +29,7 @@ def HDL_input():
     HDL_value = int(input("Enter the HDL result:"))
     return HDL_value
 
-  
+
 def HDL_analysis(HDL_int):
     if HDL_int >= 60:
         answer = "Normal"
@@ -70,7 +70,8 @@ def LDL_analysis(LDL_input):
 def total_cholestrol_driver():
     tot_chol = int(input("Enter Total Cholestrol result: "))
     tot_chol_analys = tot_cholestrol_analysis(tot_chol)
-    print(f'A total cholestrol result of {tot_chol} is considered {tot_chol_analys}')
+    print(f'A total cholestrol result of {tot_chol} '
+          f'is considered {tot_chol_analys}')
 
 
 def tot_cholestrol_analysis(total_cholestrol):
