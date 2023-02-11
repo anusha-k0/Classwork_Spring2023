@@ -3,61 +3,55 @@ def create_patient_entry(patient_name, patient_mrn, patient_age):
     return new_patient
 
 
-def medtest_value_finder(db, mrn_to_find, test_name):
-    for patient in db:
-        if patient[1] == mrn_to_find:
-            for test in patient[3]:
-                if test[0] == test_name:
-                    return test[1]
-                else:
-                    print('Test not done!')
-    else:
-        print('MRN not found')
-
-
 def main_driver():
     db = []
-    db.append(create_patient_entry('Ann Ables', 1, 34))
-    db.append(create_patient_entry('Bob Boyles', 2, 24))
-    db.append(create_patient_entry('Charles Lyles', 3, 65))
+    db.append(create_patient_entry("Ann Ables", 1, 34))
+    db.append(create_patient_entry("Bob Boyles", 2, 45))
+    db.append(create_patient_entry("Chris Chou", 3, 52))
     print(db)
-    add_test_to_patient(1, db, "HDL", 120)
-    add_test_to_patient(2, db, "LDL", 100)
-    add_test_to_patient(2, db, "HDL", 99)
+    add_test_to_patient(db, 1, "HDL", 120)
+    add_test_to_patient(db, 2, "LDL", 100)
+    add_test_to_patient(db, 2, "HDL", 99)
     room_numbers = ["103", "232", "333"]
     print(db)
     print_directory(db, room_numbers)
-    test_val1 = medtest_value_finder(db, 2, 'LDL')
-    print(test_val1)
+    print(get_test_result(db, 2, "LDL"))
 
 
 def print_directory(db, room_numbers):
-    for idx, patient in enumerate(db):
-        print(f"Patient {db[idx][0]} in room {room_numbers[idx]}")
+    for i, patient in enumerate(db):
+        print("Patient {} is in room {}".format(patient[0], room_numbers[i]))
     for patient, rn in zip(db, room_numbers):
-        print(f"Patient {patient[0]} in room {rn}")
-
-    # print("Get patient Ann")
-    # mrn_to_find = 4
-    # found_patient = get_patient_entry(mrn_to_find, db)
-    # if found_patient is False:
-    #   print(f"Patient MRN ({mrn_to_find}) not found")
-    # print(found_patient)
+        print("Patient {} is in room {}".format(patient[0], rn))
 
 
-def get_patient_entry(mrn_to_find, db):
+def get_patient_entry(db, mrn_to_find):
     for patient in db:
-        if mrn_to_find == patient[1]:
+        if patient[1] == mrn_to_find:
             return patient
     return False
 
 
-def add_test_to_patient(mrn_to_find, db, test_name, test_value):
-    patient = get_patient_entry(mrn_to_find, db)
+def add_test_to_patient(db, mrn_to_find, test_name, test_value):
+    patient = get_patient_entry(db, mrn_to_find)
     if patient is False:
-        print("Bad Entry")
+        print("Bad entry")
     else:
         patient[3].append([test_name, test_value])
+    return
+
+
+def get_test_value_from_test_list(test_list, test_name):
+    for test in test_list:
+        if test[0] == test_name:
+            return test[1]
+    return False
+
+
+def get_test_result(db, mrn, test_name):
+    patient = get_patient_entry(db, mrn)
+    test_value = get_test_value_from_test_list(patient[3], test_name)
+    return test_value
 
 
 if __name__ == "__main__":
